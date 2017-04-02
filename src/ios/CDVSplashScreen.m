@@ -122,6 +122,11 @@
 
     [self updateImage];
     _destroyed = NO;
+
+    //Show after 5 seconds even if we aren't loaded
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (uint64_t) 5 * NSEC_PER_SEC), dispatch_get_main_queue(), CFBridgingRelease(CFBridgingRetain(^(void) {
+        [self setVisible:NO];
+    })));
 }
 
 - (void)hideViews
